@@ -34,14 +34,9 @@ jobs:
       id: filter
       with:
         filters: |
-          all:
-            - '/**'
-          backend:
-            - 'backend/**'
-            - 'lib/**'
-          frontend:
-            - 'frontend/**'
-            - 'lib/**'
+          all: 'lib/**'
+          backend: 'backend/**'
+          frontend: 'frontend/**'
 
   build:
     needs: changes
