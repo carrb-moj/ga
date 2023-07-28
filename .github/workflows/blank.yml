@@ -52,7 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run a one-line script for Package
-        run: echo Hello ${{ matrix.package }}
+        run: echo Hello World #${{ matrix.package }}
 
 
   # This workflow contains a single job called "build"
