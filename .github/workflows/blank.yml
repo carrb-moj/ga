@@ -34,6 +34,7 @@ jobs:
       id: filter
       with:
         filters: |
+          all:
           backend:
             - 'backend/**'
             - 'lib/**'
