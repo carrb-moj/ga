@@ -34,7 +34,8 @@ jobs:
       id: filter
       with:
         filters: |
-          all: 'lib/**'
+          all: '*'
+          lib: 'lib/**'
           backend: 'backend/**'
           frontend: 'frontend/**'
 
@@ -48,7 +49,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run a one-line script for Package
-        run: echo Hello World #${{ matrix.package }}
+        run: echo Hello World ${{ matrix.package }}
 
 
   # This workflow contains a single job called "build"
