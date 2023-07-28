@@ -35,8 +35,10 @@ jobs:
         filters: |
           backend:
             - 'backend/**'
+            - 'lib/**'
           frontend:
             - 'frontend/**'
+            - 'lib/**'
 
   # This workflow contains a single job called "build"
   backend:
