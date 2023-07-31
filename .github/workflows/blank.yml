@@ -52,8 +52,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - if: ${{ matrix.package != 'all' }}
+        name: Read yaml file
+        id: yaml-output
+        uses: christian-ci/action-yaml-githu-output@1.0.0
+        with:
+          file_path: ${{ matrix.package }}.yaml
+      - if: ${{ matrix.package != 'all' }}
         name: Run a one-line script for Package
-        run: echo Hello World ${{ matrix.package }}
+        run: |
+          echo Hello World ${{ matrix.package }}
+          echo Dockerfile ${{ steps.yaml-output.outputs.dockerfile }}
 
 
   # This workflow contains a single job called "build"
