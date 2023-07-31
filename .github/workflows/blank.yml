@@ -54,7 +54,7 @@ jobs:
       - if: ${{ matrix.package != 'all' }}
         name: Read yaml file
         id: yaml-output
-        uses: uses: pietrobolcato/action-read-yaml@1.1.0
+        uses: pietrobolcato/action-read-yaml@1.1.0
         with:
           config: ${{ matrix.package }}.yaml
       - if: ${{ matrix.package != 'all' }}
