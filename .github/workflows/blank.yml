@@ -35,9 +35,12 @@ jobs:
       with:
         filters: |
           all: '*'
-          lib: 'lib/**'
-          backend: 'backend/**'
-          frontend: 'frontend/**'
+          backend: 
+            - 'backend/**'
+            - 'lib/**'
+          frontend: 
+            - 'frontend/**'
+            - 'lib/**'
 
   build:
     needs: changes
