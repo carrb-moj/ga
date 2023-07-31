@@ -54,7 +54,7 @@ jobs:
       - if: ${{ matrix.package != 'all' }}
         name: Read yaml file
         id: yaml-output
-        uses: christian-ci/action-yaml-github-output@1.0.0
+        uses: ngin-io/action-yaml-github-ouput@master
         with:
           file_path: ${{ matrix.package }}.yaml
       - if: ${{ matrix.package != 'all' }}
