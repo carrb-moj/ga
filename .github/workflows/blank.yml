@@ -51,6 +51,7 @@ jobs:
         package: ${{ fromJSON(needs.changes.outputs.packages) }}
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - if: ${{ matrix.package != 'all' }}
         name: Read yaml file
         id: yaml-output
