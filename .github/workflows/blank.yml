@@ -54,14 +54,14 @@ jobs:
       - if: ${{ matrix.package != 'all' }}
         name: Read yaml file
         id: yaml-output
-        uses: ngin-io/action-yaml-github-ouput@v1.0.0
+        uses: uses: pietrobolcato/action-read-yaml@1.1.0
         with:
-          file_path: ${{ matrix.package }}.yaml
+          config: ${{ matrix.package }}.yaml
       - if: ${{ matrix.package != 'all' }}
         name: Run a one-line script for Package
         run: |
           echo Hello World ${{ matrix.package }}
-          echo Dockerfile ${{ steps.yaml-output.outputs.dockerfile }}
+          echo Dockerfile ${{ steps.yaml-output.outputs['dockerfile'] }}
 
 
   # This workflow contains a single job called "build"
