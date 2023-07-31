@@ -50,9 +50,9 @@ jobs:
         # e.g. ['package1', 'package2'] if both package folders contains changes
         package: ${{ fromJSON(needs.changes.outputs.packages) }}
     runs-on: ubuntu-latest
-    if: ${{ needs.changes.outputs.packages != 'all' }}
     steps:
-      - name: Run a one-line script for Package
+      - if: ${{ matrix.package != 'all' }}
+        name: Run a one-line script for Package
         run: echo Hello World ${{ matrix.package }}
 
 
