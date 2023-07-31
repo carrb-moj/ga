@@ -56,11 +56,12 @@ jobs:
         id: yaml-output
         uses: pietrobolcato/action-read-yaml@1.1.0
         with:
-          config: ${{ matrix.package }}.yaml
+          config: ${{ github.workspace }}/${{ matrix.package }}.yaml
       - if: ${{ matrix.package != 'all' }}
         name: Run a one-line script for Package
         run: |
           echo Hello World ${{ matrix.package }}
+          ls -al
           echo Dockerfile ${{ steps.yaml-output.outputs['dockerfile'] }}
 
 
