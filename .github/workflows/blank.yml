@@ -52,20 +52,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - if: ${{ matrix.package != 'all' }} && contains('refs/heads/main')
+      - if: ${{ matrix.package != 'all' }} || contains('refs/heads/main')
         name: Read yaml file
         id: yaml-output
         uses: pietrobolcato/action-read-yaml@1.1.0
         with:
           config: ${{ github.workspace }}/${{ matrix.package }}.yaml
-      - if: ${{ matrix.package != 'backend' }} && contains('refs/heads/main')
+      - if: ${{ matrix.package != 'backend' }} || contains('refs/heads/main')
         name: Run a one-line script for Package
         run: |
           echo Hello World ${{ matrix.package }}
           ls -al
           echo Dockerfile ${{ steps.yaml-output.outputs['dockerfile'] }}
           echo backend
-      - if: ${{ matrix.package != 'frontend' }} && contains('refs/heads/main')
+      - if: ${{ matrix.package != 'frontend' }} || contains('refs/heads/main')
         name: Run a one-line script for Package
         run: |
           echo Hello World ${{ matrix.package }}
