@@ -53,8 +53,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - if: |
-          ${{ matrix.package != 'all' }} &&
-          github.event_name == 'push' &&
+          matrix.package != 'all' &&
+          github.event_name != 'pull_request' &&
           github.ref == 'refs/heads/main'
         name: Read yaml file
         id: yaml-output
@@ -62,8 +62,8 @@ jobs:
         with:
           config: ${{ github.workspace }}/${{ matrix.package }}.yaml
       - if: |
-          ${{ matrix.package != 'backend' }} &&
-          github.event_name == 'push' &&
+          matrix.package != 'backend' &&
+          github.event_name != 'pull_request' &&
           github.ref == 'refs/heads/main'
         name: Run a one-line script for Package
         run: |
@@ -72,8 +72,8 @@ jobs:
           echo Dockerfile ${{ steps.yaml-output.outputs['dockerfile'] }}
           echo backend
       - if: |
-          ${{ matrix.package != 'frontend' }} &&
-          github.event_name == 'push' &&
+          matrix.package != 'frontend' &&
+          github.event_name != 'pull_request' &&
           github.ref == 'refs/heads/main'
         name: Run a one-line script for Package
         run: |
