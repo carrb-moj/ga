@@ -50,23 +50,31 @@ jobs:
         # e.g. ['package1', 'package2'] if both package folders contains changes
         package: ${{ fromJSON(needs.changes.outputs.packages) }}
     runs-on: ubuntu-latest
-    if: github.ref == 'ref/heads/main'
     steps:
       - uses: actions/checkout@v3
-      - if: ${{ matrix.package != 'all' }}
+      - if: |
+          matrix.package != 'all' &&
+          github.event_name != 'pull_request' &&
+          github.ref == 'refs/heads/main'
         name: Read yaml file
         id: yaml-output
         uses: pietrobolcato/action-read-yaml@1.1.0
         with:
           config: ${{ github.workspace }}/${{ matrix.package }}.yaml
-      - if: ${{ matrix.package != 'backend' }}
+      - if: |
+          matrix.package != 'backend' &&
+          github.event_name != 'pull_request' &&
+          github.ref == 'refs/heads/main'
         name: Run a one-line script for Package
         run: |
           echo Hello World ${{ matrix.package }}
           ls -al
           echo Dockerfile ${{ steps.yaml-output.outputs['dockerfile'] }}
           echo backend
-      - if: ${{ matrix.package != 'frontend' }}
+      - if: |
+          matrix.package != 'frontend' &&
+          github.event_name != 'pull_request' &&
+          github.ref == 'refs/heads/main'
         name: Run a one-line script for Package
         run: |
           echo Hello World ${{ matrix.package }}
