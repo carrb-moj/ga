@@ -7,7 +7,8 @@ on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "main" ]
-
+  pull_request:
+    branches: [ "main" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -51,20 +52,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - if: ${{ matrix.package != 'all' }}
+      - if: ${{ matrix.package != 'all' }} && contains('refs/heads/main')
         name: Read yaml file
         id: yaml-output
         uses: pietrobolcato/action-read-yaml@1.1.0
         with:
           config: ${{ github.workspace }}/${{ matrix.package }}.yaml
-      - if: ${{ matrix.package != 'backend' }}
+      - if: ${{ matrix.package != 'backend' }} && contains('refs/heads/main')
         name: Run a one-line script for Package
         run: |
           echo Hello World ${{ matrix.package }}
           ls -al
           echo Dockerfile ${{ steps.yaml-output.outputs['dockerfile'] }}
           echo backend
-      - if: ${{ matrix.package != 'frontend' }}
+      - if: ${{ matrix.package != 'frontend' }} && contains('refs/heads/main')
         name: Run a one-line script for Package
         run: |
           echo Hello World ${{ matrix.package }}
