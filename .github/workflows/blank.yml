@@ -54,7 +54,8 @@ jobs:
       - uses: actions/checkout@v3
       - if: |
           ${{ matrix.package != 'all' }} &&
-          github.event_name != 'pull_request'
+          github.event_name == 'push' &&
+          github.ref == 'refs/heads/main'
         name: Read yaml file
         id: yaml-output
         uses: pietrobolcato/action-read-yaml@1.1.0
@@ -62,7 +63,8 @@ jobs:
           config: ${{ github.workspace }}/${{ matrix.package }}.yaml
       - if: |
           ${{ matrix.package != 'backend' }} &&
-          github.event_name != 'pull_request'
+          github.event_name == 'push' &&
+          github.ref == 'refs/heads/main'
         name: Run a one-line script for Package
         run: |
           echo Hello World ${{ matrix.package }}
@@ -71,7 +73,8 @@ jobs:
           echo backend
       - if: |
           ${{ matrix.package != 'frontend' }} &&
-          github.event_name != 'pull_request'
+          github.event_name == 'push' &&
+          github.ref == 'refs/heads/main'
         name: Run a one-line script for Package
         run: |
           echo Hello World ${{ matrix.package }}
