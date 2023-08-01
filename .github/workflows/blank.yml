@@ -50,7 +50,7 @@ jobs:
         # e.g. ['package1', 'package2'] if both package folders contains changes
         package: ${{ fromJSON(needs.changes.outputs.packages) }}
     runs-on: ubuntu-latest
-    if: github.base_ref ==  'main'
+    if: github.head_ref == 'main'
     steps:
       - uses: actions/checkout@v3
       - if: ${{ matrix.package != 'all' }}
