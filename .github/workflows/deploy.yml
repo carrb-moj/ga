@@ -1,0 +1,52 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Deploy
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+      projects:
+        description: Project
+        type: choice
+        required: true
+        options:
+          - '["mercury-data-transform-load"]'
+          # ^ add new projects here
+          # GitHub Actions doesn't support dynamic choices, we must add each project here to enable manual deployments
+          # See https://github.com/community/community/discussions/11795
+      environment:
+        description: Environment
+        type: choice
+        required: true
+        options:
+          - test
+          - preprod
+          - prod
+      version:
+        description: Image version
+        type: string
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Any Name Bash Test Step
+        shell: bash
+        run: |
+          echo "GH_REPO: $GH_REPO"
+          echo "GH_REPO_O: $GH_REPO_O"
+          echo "GH_T: $GH_T"
+          echo "input.env ${input.environment}"
+        env:
+          GH_REPO: ${{ github.repository }}
+          GH_REPO_O: ${{ github.repository_owner }}
+          GH_T: ${{ secrets.GITHUB_TOKEN }}     
+
+
+
+
