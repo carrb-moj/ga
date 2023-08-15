@@ -41,9 +41,9 @@ jobs:
           echo "GH_REPO: $GH_REPO"
           echo "GH_REPO_O: $GH_REPO_O"
           echo "GH_T: $GH_T"
-          echo "inputs.env ${inputs.environment}"
-          echo "inputs.project ${inputs.projects}"
-          echo "inputs.version ${inputs.version}"
+          echo "inputs.env ${{ inputs.environment }}"
+          echo "inputs.project ${{ inputs.projects }}"
+          echo "inputs.version ${{ inputs.version }}"
         env:
           GH_REPO: ${{ github.repository }}
           GH_REPO_O: ${{ github.repository_owner }}
