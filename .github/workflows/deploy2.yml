@@ -40,20 +40,20 @@ on:
         type: string
         required: true
 
-  jobs:
-    deploy:
+jobs:
+  deploy:
     runs-on: ubuntu-latest
     strategy:
         fail-fast: false
         matrix:
-        project: ${{ fromJson(inputs.projects) }}
+          project: ${{ fromJson(inputs.projects) }}
     concurrency: deploy-${{ matrix.project }}-${{ inputs.environment }}
     environment:
     name: ${{ inputs.environment }}
     steps:
         - name: Bash Test Step
-        shell: bash
-        run: |
+          shell: bash
+          run: |
             echo "inputs.env ${{ inputs.environment }}"
             echo "inputs.project ${{ inputs.projects }}"
             echo "inputs.version ${{ inputs.version }}"
