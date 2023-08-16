@@ -55,5 +55,5 @@ jobs:
           shell: bash
           run: |
             echo "inputs.env ${{ inputs.environment }}"
-            echo "inputs.project ${{ inputs.projects }}"
+            echo "inputs.project ${{ matrix.project }}"
             echo "inputs.version ${{ inputs.version }}"
