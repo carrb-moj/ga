@@ -49,7 +49,7 @@ jobs:
           project: ${{ fromJson(inputs.projects) }}
     concurrency: deploy-${{ matrix.project }}-${{ inputs.environment }}
     environment:
-    name: ${{ inputs.environment }}
+      name: ${{ inputs.environment }}
     steps:
         - name: Bash Test Step
           shell: bash
