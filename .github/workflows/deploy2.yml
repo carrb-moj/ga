@@ -39,6 +39,14 @@ on:
         description: Image version
         type: string
         required: true
+      part:
+        description: Frontend or Backend
+        type: choice
+        required: true
+        options:
+          - BACKEND
+          - FRONTEND
+
 
 jobs:
   deploy:
@@ -57,3 +65,4 @@ jobs:
             echo "inputs.env ${{ inputs.environment }}"
             echo "inputs.project ${{ matrix.project }}"
             echo "inputs.version ${{ inputs.version }}"
+            echo "part access key ${{ vars.BACKEND_SECRET }}"
