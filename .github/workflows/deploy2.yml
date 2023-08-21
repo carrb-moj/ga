@@ -61,10 +61,10 @@ jobs:
     steps:
         - name: Check if backend
           if: startswith(inputs.part, 'BACKEND')
-          run: echo "MY_SECRET=${{ vars.BACKEND_SECRET }}"
+          run: echo "export MY_SECRET=${{ vars.BACKEND_SECRET }}"
         - name: Check if frontend
           if: startswith(inputs.part, 'FRONTEND')
-          run: echo "MY_SECRET=${{ vars.FRONTEND_SECRET }}"          
+          run: echo "export MY_SECRET=${{ vars.FRONTEND_SECRET }}"          
         - name: Bash Test Step
           shell: bash
           run: |
