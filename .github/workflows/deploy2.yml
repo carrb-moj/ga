@@ -58,6 +58,8 @@ jobs:
     concurrency: deploy-${{ matrix.project }}-${{ inputs.environment }}
     environment:
       name: ${{ inputs.environment }}
+    env: 
+      MY_SECRET: "not set"
     steps:
         - name: Check if backend
           if: startswith(inputs.part, 'BACKEND')
