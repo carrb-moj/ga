@@ -68,10 +68,11 @@ jobs:
             MY_SECRET: ${{ vars.FRONTEND_SECRET }}
           run: |
             echo "part access key $MY_SECRET"
+            export $MY_SECRET >> $MYS
         - name: Bash Test Step
           shell: bash
           run: |
             echo "inputs.env ${{ inputs.environment }}"
             echo "inputs.project ${{ matrix.project }}"
             echo "inputs.version ${{ inputs.version }}"
-            echo "part access key $MY_SECRET"
+            echo "part access key $MYS"
