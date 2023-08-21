@@ -59,10 +59,16 @@ jobs:
     environment:
       name: ${{ inputs.environment }}
     steps:
+        - name: Check if backend
+          if: startswith(inputs.part, 'BACKEND')
+          run: env.MY_SECRET == vars.BACKEND_SECRET
+        - name: Check if frontend
+          if: startswith(inputs.part, 'FRONTEND')
+          run: env.MY_SECRET == vars.FRONTEND_SECRET          
         - name: Bash Test Step
           shell: bash
           run: |
             echo "inputs.env ${{ inputs.environment }}"
             echo "inputs.project ${{ matrix.project }}"
             echo "inputs.version ${{ inputs.version }}"
-            echo "part access key ${{ vars.BACKEND_SECRET }}"
+            echo "part access key ${{ env.MY_SECRET }}"
