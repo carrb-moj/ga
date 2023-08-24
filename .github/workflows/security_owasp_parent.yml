@@ -1,0 +1,35 @@
+name: Parent security OWASP dependency check
+
+on:
+  workflow_dispatch:
+    inputs:
+      job:
+        description: Security job to run
+        type: choice
+        required: true
+        options:
+          - owasp
+          - trivy
+          - veracode
+  schedule:
+    - cron: "30 5 * * MON" # Every Monday at 05:30 UTC
+
+jobs:
+  security-owasp-extractor-check:
+    if: ${{ inputs.job }} == 'owasp'
+    name: Legacy Data Extractor OWASP dependency check
+    uses: ./.github/workflows/security_owasp.yml
+    with:
+      subproject: mercury-data-extractor
+  security-owasp-transformer-check:
+    if: ${{ inputs.job }} == 'owasp'
+    name: Legacy Transformer security OWASP dependency check
+    uses: ./.github/workflows/security_owasp.yml
+    with:
+      subproject: mercury-data-transform-load
+  security-owasp-test-gen-check:
+    if: ${{ inputs.job }} == 'owasp'
+    name: Legacy Test Data Generator security OWASP dependency check
+    uses: ./.github/workflows/security_owasp.yml
+    with:
+      subproject: mercury-test-generator
