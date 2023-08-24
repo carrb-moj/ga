@@ -16,19 +16,19 @@ on:
 
 jobs:
   security-owasp-extractor-check:
-    if: ${{ inputs.job }} == 'owasp'
+    if: inputs.job == 'owasp'
     name: Legacy Data Extractor OWASP dependency check
     uses: ./.github/workflows/security_owasp.yml
     with:
       subproject: mercury-data-extractor
   security-owasp-transformer-check:
-    if: ${{ inputs.job }} == 'owasp'
+    if: inputs.job == 'owasp'
     name: Legacy Transformer security OWASP dependency check
     uses: ./.github/workflows/security_owasp.yml
     with:
       subproject: mercury-data-transform-load
   security-owasp-test-gen-check:
-    if: ${{ inputs.job }} == 'owasp'
+    if: inputs.job == 'owasp'
     name: Legacy Test Data Generator security OWASP dependency check
     uses: ./.github/workflows/security_owasp.yml
     with:
