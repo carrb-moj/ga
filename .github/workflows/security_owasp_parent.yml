@@ -1,4 +1,4 @@
-name: Parent security OWASP dependency check
+name: Parent security workflow
 
 on:
   workflow_dispatch:

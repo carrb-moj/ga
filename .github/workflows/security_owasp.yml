@@ -1,4 +1,4 @@
-name: Security OWASP dependency check
+name: Security workflow
 
 on:
   workflow_call:
@@ -17,20 +17,22 @@ jobs:
         run: |
           echo "running owasp on ${{ inputs.subproject }}"
 
-  # trivy-scan:
-  #   runs-on: ubuntu-latest
-  #   # strategy:
-  #   #   fail-fast: false
-  #   #   matrix:
-  #   #     project: ${{ inputs.subproject }}
-  #   steps:
-  #     - uses: actions/checkout@v3
+  trivy-scan:
+    runs-on: ubuntu-latest
+    # strategy:
+    #   fail-fast: false
+    #   matrix:
+    #     project: ${{ inputs.subproject }}
+    steps:
+      - uses: actions/checkout@v3
       
-  #     - name: Bash Lst Step
-  #       shell: bash
-  #       run: |
-  #         cd .github/
-  #         ls -alR
+      - name: Set Transform ECR path
+        if: inputs.subproject == 'mercury-data-transform-load'
+        shell: bash
+        run: |
+          ecr = amazon.ecr.transform:latest
+          echo "ECR=$ecr" >> $GITHUB_ENV
+          echo "ecr=$ECR" | tee -a $GITHUB_OUTPUT
 
   #     - name: Pull docker image
   #       id: pull
