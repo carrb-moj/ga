@@ -44,6 +44,7 @@ jobs:
   #         subproject: mercury-data-transform-load
 
   security-trivy-transformer-check:
+    if: inputs.job == 'trivy'
     name: Legacy Transformer trivy scan
     uses: ./.github/workflows/security_trivy.yml
     with:
