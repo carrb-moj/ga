@@ -33,12 +33,18 @@ jobs:
     uses: ./.github/workflows/security_owasp.yml
     with:
       subproject: mercury-test-generator
+  # security-trivy-transformer-check:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Legacy Transformer trivy scan
+  #       if: inputs.job == 'trivy'
+  #       uses: ./.github/workflows/security_trivy.yml
+  #       with:
+  #         subproject: mercury-data-transform-load
+
   security-trivy-transformer-check:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Legacy Transformer trivy scan
-        if: inputs.job == 'trivy'
-        uses: ./.github/workflows/security_trivy.yml
-        with:
-          subproject: mercury-data-transform-load
+    name: Legacy Transformer trivy scan
+    uses: ./.github/workflows/security_trivy.yml
+    with:
+      subproject: mercury-data-transform-load
