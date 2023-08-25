@@ -23,7 +23,7 @@ jobs:
         run: |
           ecr=amazon.ecr.transform:latest
           echo "ECR=$ecr" >> $GITHUB_ENV
-          echo "ecr=$ECR" | tee -a $GITHUB_OUTPUT
+          echo "ecr=$ecr" | tee -a $GITHUB_OUTPUT
 
       - name: Run trivy scan on transform
         if: inputs.subproject == 'mercury-data-transform-load'
